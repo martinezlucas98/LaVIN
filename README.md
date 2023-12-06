@@ -53,7 +53,7 @@ pip install -e .
 ### Data Preparation
 - For ScienceQA, please prepare the dataset from the [official repo](https://github.com/lupantech/ScienceQA).
 - For Multimodal Chatbot, download the images in _train2014_ split from [MSCOCO](http://images.cocodataset.org/zips/train2014.zip), and obtain the prepared 52k text-only and 158k text-image instruction-following data from [here](https://drive.google.com/file/d/1gORDPruqwXbgy6NYmhpDXO7t089yzsg3/view?usp=share_link).
-- Obtain the weights of LLaMA from [this form](https://forms.gle/jk851eBVbX1m5TAv5)  (official) or Download [LLaMA-7B](https://huggingface.co/nyanko7/LLaMA-7B/tree/main) and [LLaMA-13B](https://huggingface.co/TheBloke/llama-13b) from HuggingFace (unofficial).
+- Obtain the weights of LLaMA (and tokenizer.model) from [this form](https://forms.gle/jk851eBVbX1m5TAv5)  (official) or Download [LLaMA-7B](https://huggingface.co/nyanko7/LLaMA-7B/tree/main) and [LLaMA-13B](https://huggingface.co/TheBloke/llama-13b) from HuggingFace (unofficial).
 - If you want to use Vicuna weights to initialize the model, please download from [here](https://huggingface.co/lmsys).
 After that, the file structure should look like:
 
@@ -77,24 +77,24 @@ data/
       |-- test           # ScienceQA test image
   |-- weights
       |-- tokenizer.model
-          |--7B
-              |-- params.json
-              |-- consolidated.00.pth
-          |--13B
-              |-- params.json
-              |-- consolidated.00.pth
-              |-- consolidated.01.pth
-          |--vicuna_7B
-          |--vicuna_13B
-              |-- config.json
-              |-- generation_config.json
-              |-- pytorch_model.bin.index.json
-              |-- special_tokens_map.json
-              |-- tokenizer_config.json
-              |-- tokenizer.model
-              |-- pytorch_model-00001-of-00003.bin
-              |-- pytorch_model-00002-of-00003.bin
-              |-- pytorch_model-00003-of-00003.bin
+      |--7B
+          |-- params.json
+          |-- consolidated.00.pth
+      |--13B
+          |-- params.json
+          |-- consolidated.00.pth
+          |-- consolidated.01.pth
+      |--vicuna_7B
+      |--vicuna_13B
+          |-- config.json
+          |-- generation_config.json
+          |-- pytorch_model.bin.index.json
+          |-- special_tokens_map.json
+          |-- tokenizer_config.json
+          |-- tokenizer.model
+          |-- pytorch_model-00001-of-00003.bin
+          |-- pytorch_model-00002-of-00003.bin
+          |-- pytorch_model-00003-of-00003.bin
           ......
 ```
 ## Fine-tuning
@@ -115,7 +115,7 @@ bash ./scripts/finetuning_sqa_vicuna_7b.sh
 
 LaVIN-lite with LLaMA weights (single GPU):
 ```bash
-bash ./scripts/finetuning_sqa_vicuna_7b_lite.sh
+bash ./scripts/finetuning_sqa_7b_lite.sh
 ```
 
 Reproduce the performance of LaVIN-13B on ScienceQA (~2 hours on 8x A100 (80G)).
